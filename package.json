@@ -1,0 +1,14 @@
+{
+  "name": "web-app",
+  "version": "1.0.0",
+  "description": "Nothing",
+  "main": "main.js",
+  "scripts": {
+    "test": "electron ."
+  },
+  "author": "Nabil Sadik",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^13.1.9"
+  }
+}
