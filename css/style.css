@@ -7,13 +7,14 @@
   --text-color: black;
   --connection-area-bg-color: #fafafa;
 }
-.dark-theme {
+/* Dark will be available soon */
+/* .dark-theme { */
   /* Dark theme colors */
-  --main-surface-bg-color:#000000;;
-  --header-color: #bf360c;
-  --text-color: white;
-  --connection-area-bg-color: #212121;
-}
+  /* --main-surface-bg-color:#000000; */
+  /* --header-color: #bf360c; */
+  /* --text-color: white; */
+  /* --connection-area-bg-color: #212121; */
+/* } */
 #nothing{
   font-family: "Open Sans", sans-serif;
   background-color: var(--main-surface-bg-color);
@@ -26,7 +27,8 @@
 }
 #connection-icon {
   font-size: 72px;
-  margin: auto;
+  padding-left: 45%;
+  padding-right: 45%;
 }
 #app-name{
   color: var(--text-color);
@@ -46,7 +48,6 @@
   height: 90%;
   border-radius: 20px;
   margin: auto;
-  padding: 2.5% 2.5% 2.5% 2.5%;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 8px 24px;
 }
 #connection-status {

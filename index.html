@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link type='text/css' rel="stylesheet" href='./lib/switch.css'>
     <link type='text/css' rel="stylesheet" href='./css/style.css'>
     <link rel="stylesheet" href='./lib/bootstrap/bootstrap.min.css'>
     <script src='./lib/bootstrap/bootstrap.bundle.min.js'></script>
@@ -13,17 +12,12 @@
 <body class="nothing" id="nothing">
     <div class="header sticky-top" id="header">
         <h5 id="app-name">Cloudflare WARP</h5>
-        <div id="theme-switch-area" class="my-2 mx-2" style="float: right;" title="Toggle themes">
-          <label class="switch">
-            <input type="checkbox" id="theme-switch">
-            <span class="slider round"></span>
-          </label>
+        <button onclick="refreshAppPage()" title="Refresh. &#013Note: Press this button if you face any abnormality" class="btn my-1 float-end" style="background-color: inherit;"><i class="fas fa-redo-alt"></i></button>
         </div>
-    </div>
-    <div class="my-5 mx-auto" id="connection-area">
+    <div class="my-4 mx-auto" id="connection-area">
       <br><br><br><br>
     <i id="connection-icon" class="fas"></i>
-    <h3 class="text-center"><span id="connection-status">Your connection is not private</span></h3>
+    <h3 class="text-center my-2"><span id="connection-status">Your connection is not private</span></h3>
     <button id="btn-connect" class="btn d-grid gap-2 col-6 btn-lg mx-auto">Connect</button>
     <br>
     <div id="connection-mode" class="d-grid gap-2">

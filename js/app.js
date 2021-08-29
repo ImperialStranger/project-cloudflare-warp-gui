@@ -1,48 +1,58 @@
-var connectedPhrase = "Status update: Connected\n";
-var disconnectedPhrase = "Status update: Disconnected\n";
+const { exec } = require('child_process');
+const fs = require('fs');
+
+var connectedPhrase = "Success\nStatus update: Connected\n";
+var disconnectedPhrase = "Success\nStatus update: Disconnected\n";
 var iconClass;
 var o;
 
-var theme_switch = document.getElementById("theme-switch");
 var connectionMode = document.getElementById("modes");
 var btn_conncet = document.getElementById("btn-connect");
 var monitor_conncetion_status = document.getElementById("connection-status");
 var connection_icon = document.getElementById("connection-icon");
 
-function executePython(cmd, indx) {
-  // Nothing
+function refreshAppPage() {
+  window.location.reload();
 }
 
-function checkTheme() {
-  
-  var themeCookie = Cookies.get('theme');
-  if (typeof themeCookie == 'undefined') {
-    Cookies.set('theme', 'light-theme', { expires: 366, path: '' })
-    setTheme(null, 'light-theme')
-    theme_switch.checked = false;
+function executeCommand(cmd) {
+  exec(cmd, (error, stdout, stderr) => {
+    if (error) {
+      fs.writeFileSync('error.pdnr', error, function(){
+        console.log('Data Updated');
+      })
+    }
+    fs.writeFileSync('output.pdnr', stdout, function(){
+      console.log('Data Updated');
+    })
+  })
+  var output = fs.readFileSync('output.pdnr', 'utf-8')
+  o = output;
+}
+
+function loadMode() {
+  var cm = fs.readFileSync('mode.pdnr', 'utf-8');
+  if (cm != null && cm != '') {
+    exec(cm, (error) => {
+      if (error) throw error;
+    })
+    connectionMode.value = cm;
+    console.log('i');
   }
   else {
-    setTheme(null, themeCookie);
-    theme_switch.checked = (themeCookie == 'light-theme') ? false : (themeCookie == 'dark-theme') ? true : "";
+    fs.writeFileSync('mode.pdnr', 'warp-cli set-mode dot')
+    exec(cm, (error) => {
+      if (error) throw error;
+    })
+    connectionMode.value = 'warp-cli set-mode dot';
+    console.log('e');
   }
-}
-
-function switchTheme(){
-  var theme = (theme_switch.checked == false) ? 'light-theme' : (theme_switch.checked == true) ? 'dark-theme' : "";
-  var prevtheme = (theme == 'light-theme') ? 'dark-theme' : (theme == 'dark-theme') ? 'light-theme' : "";
-  setTheme(prevtheme, theme);
-  Cookies.set('theme', theme, { expires: 366, path: '' })
-}
-
-function setTheme(prevtheme, newTheme) {
-  document.body.classList.remove(prevtheme)
-  document.body.classList.add(newTheme);
 }
 
 function getConnectionMode() {
   var mode = connectionMode.options[connectionMode.selectedIndex].value;
-//   executePython(mode, "0");
-//   executePython("warp-cli settings", "1")
+  executeCommand(mode);
+  fs.writeFileSync('mode.pdnr', mode)
 }
 
 function connect() {
@@ -51,8 +61,8 @@ function connect() {
   changeIconClass(iconClass, "fa-lock");
   btn_conncet.innerText = "Disconnect";
   btn_conncet.onclick = disconnect;
-//   executePython("warp-cli connect", "0");
-//   executePython("warp-cli status", "1");
+  executeCommand("warp-cli connect");
+  executeCommand("warp-cli status");
 }
 
 function disconnect() {
@@ -61,8 +71,8 @@ function disconnect() {
   changeIconClass(iconClass, "fa-lock-open"); //fa-lock-open fa-lock"
   btn_conncet.innerText = "Connect";
   btn_conncet.onclick = connect;
-//   executePython("warp-cli disconnect", "0");
-//   executePython("warp-cli status", "1");
+  executeCommand("warp-cli disconnect");
+  executeCommand("warp-cli status");
 }
 
 function changeIconClass(oldClassName, newClassName) {
@@ -96,9 +106,11 @@ function setStatus() {
   changeIconClass(null, iconClass);
 }
 
-window.addEventListener("load", checkTheme)
-window.addEventListener("load", function () {
-  theme_switch.addEventListener("input", switchTheme)
-})
-// window.addEventListener("load", executePython("warp-cli status", "1"));
+connectionMode.addEventListener('input', getConnectionMode)
+
+window.addEventListener("load", executeCommand("warp-cli status"));
 window.addEventListener("load", setStatus);
+window.addEventListener("load", function(){
+  document.body.classList.add('light-theme');
+});
+window.addEventListener('load', loadMode)

@@ -1,5 +1,5 @@
 const {app, BrowserWindow} = require('electron');
-app.commandLine.appendSwitch('disable-http-cache');
+app.commandLine.appendSwitch("disable-http-cache");
 
 function createWindow() {
     let mainWindow = new BrowserWindow({
