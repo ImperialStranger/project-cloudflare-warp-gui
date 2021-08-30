@@ -37,7 +37,6 @@ function loadMode() {
       if (error) throw error;
     })
     connectionMode.value = cm;
-    console.log('i');
   }
   else {
     fs.writeFileSync('mode.pdnr', 'warp-cli set-mode dot')
@@ -45,7 +44,6 @@ function loadMode() {
       if (error) throw error;
     })
     connectionMode.value = 'warp-cli set-mode dot';
-    console.log('e');
   }
 }
 
