@@ -1,13 +1,13 @@
 {
-  "name": "web-app",
+  "name": "cloudflare-warp-gui",
   "version": "1.0.0",
-  "description": "Nothing",
+  "description": "A GUI toolkit for Cloudflare WARP Linux version",
   "main": "main.js",
   "scripts": {
     "test": "electron ."
   },
   "author": "Nabil Sadik",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "electron": "^13.1.9"
   }
