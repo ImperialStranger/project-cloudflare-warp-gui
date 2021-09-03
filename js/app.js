@@ -2,6 +2,7 @@ const { exec } = require('child_process');
 const fs = require('fs');
 
 var connectedPhrase = "Success\nStatus update: Connected\n";
+var connectingPhrase = "Success\nStatus update: Connecting\n";
 var disconnectedPhrase = "Success\nStatus update: Disconnected\n";
 var iconClass;
 var o;
@@ -85,7 +86,7 @@ function changeButtonClass(oldClassName, newClassName) {
 }
 
 function setStatus() {
-  if (o == connectedPhrase) {
+  if (o == connectedPhrase || o == connectingPhrase) {
     monitor_conncetion_status.innerText = "Your connection is private";
     changeButtonClass(null, "btn-danger");
     iconClass = "fa-lock";

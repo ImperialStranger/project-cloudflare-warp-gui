@@ -3,6 +3,7 @@ const fs = require('fs');
 function checkFileExist(file, data){
     try {
         fs.existsSync(file)
+        console.log(fs.existsSync(file)); 
     } catch (error) {
         // throw error;
         fs.writeFileSync(file, data);

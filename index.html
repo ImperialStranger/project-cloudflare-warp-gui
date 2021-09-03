@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link type='text/css' rel="stylesheet" href='./css/style.css'>
     <link rel="stylesheet" href='./lib/bootstrap/bootstrap.min.css'>
     <script src='./lib/bootstrap/bootstrap.bundle.min.js'></script>
     <script src="https://kit.fontawesome.com/3329c91ec9.js" crossorigin="anonymous"></script>
-    <script src="./lib/js-cookie/js.cookie.min.js"></script>
     <title>Cloudflare WARP</title>
 </head>
 <body class="nothing" id="nothing">
@@ -35,7 +36,28 @@
         <br><br>
       </form>
     </div>
-</div>
+      <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header bg-success text-light">
+          <!-- <img src="..." class="rounded me-2" alt="..."> -->
+          <strong class="me-auto"><i class="fas fa-info-circle"></i> Cloudflare WARP Important Tips</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+          If you face any abnormality, try pressing the <b><i class="fas fa-redo-alt"></i> Reload</b> button.
+        </div>
+      </div>
+      </div>
+<script>
+var option = { animation: true, delay: 5000, autohide: true}  
+var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+var toastList = toastElList.map(function (toastEl) {
+  return new bootstrap.Toast(toastEl, option)
+})
+
+for (i = 0; i < toastList.length; i++) {
+  toastList[i].show();
+}
+</script>
 <script src='./js/app.js'></script>
 </body>
 </html>
